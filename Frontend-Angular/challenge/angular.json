@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -72,6 +73,9 @@
             },
             "development": {
               "browserTarget": "challenge:build:development"
+            },
+            "options": {
+              "proxyConfig": "proxy.config.js"
             }
           },
           "defaultConfiguration": "development"
@@ -94,9 +98,19 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles.scss",
               "src/styles.css"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
