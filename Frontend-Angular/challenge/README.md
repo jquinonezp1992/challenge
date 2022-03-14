@@ -1,27 +1,66 @@
 # Challenge
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
+Kruger Corporation requiere una aplicación para llevar un registro del inventario del estado de vacunación de los empleados.
 
-## Development server
+La aplicación contará con 2 roles: Administrador y Empleado. Para el desarrollo de la aplicación tenemos las siguientes historias de usuario.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## 1. Como Administrador requiere registrar, editar, listar y eliminar a los empleados.
 
-## Code scaffolding
+Criterios de aceptación:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+a. Registrar la siguiente información del empleado.
+Cédula.
 
-## Build
+Nombres.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Apellidos.
 
-## Running unit tests
+Correo electrónico.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+b. Los campos deben contener validaciones de acuerdo al tipo de dato:
+Todos los campos son requeridos.
 
-## Running end-to-end tests
+Cédula válida. (Incluir un valor numérico y único de 10 dígitos)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Correo electrónico válido.
 
-## Further help
+Nombres y apellidos no deben contener números o caracteres especiales.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+c. Al dar de alta un empleado se debe generar un usuario y contraseña para el empleado.
+
+## 2. Como Empleado requiero ingresar al sistema para visualizar y actualizar mi información.
+
+Criterios de aceptación:
+
+a. Completar la siguiente información:
+Fecha de nacimiento.
+
+Dirección de domicilio.
+
+Teléfono móvil.
+
+Estado de vacunación: Vacunado / No Vacunado.
+
+Si el empleado está en estado vacunado, se debe pedir la siguiente información requerida:
+
+Tipo de vacuna: Sputnik, AstraZeneca, Pfizer y Jhonson&Jhonson
+
+Fecha de vacunación.
+
+Número de dosis.
+
+## 3. Como Administrador se requiere filtrar el listado de los empleados por los siguientes criterios.
+
+Criterios de aceptación:
+
+a. Filtrar por estado de vacunación.
+b. Filtrar por tipo de vacuna.
+c. Filtrar por rango de fecha de vacunación.
+
+## Ejecución
+
+$ npm run hmr
+
+## Acceder a http://localhost:4200/.
+
+Credenciales: User: ng-matero ; Password: ng-matero

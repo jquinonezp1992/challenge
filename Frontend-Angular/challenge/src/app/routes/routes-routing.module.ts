@@ -11,6 +11,7 @@ import { Error403Component } from './sessions/403.component';
 import { Error404Component } from './sessions/404.component';
 import { Error500Component } from './sessions/500.component';
 import { AuthGuard } from '@core';
+import { ListarEmpleadosComponent } from './empleados/listar-empleados/listar-empleados.component';
 
 const routes: Routes = [
   {
@@ -21,10 +22,10 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'empleados', component: ListarEmpleadosComponent },
       { path: '403', component: Error403Component },
       { path: '404', component: Error404Component },
-      { path: '500', component: Error500Component },
-  { path: 'Empleados', loadChildren: () => import('./empleados/empleados.module').then(m => m.EmpleadosModule) },
+      { path: '500', component: Error500Component }
     ],
   },
   {
