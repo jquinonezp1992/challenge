@@ -99,7 +99,7 @@ public class EmpleadoController {
             updateEmpleado.setFechaNacimiento(empleado.getFechaNacimiento());
             updateEmpleado.setEstadoVacunacion(empleado.getEstadoVacunacion());
             updateEmpleado.setCelular(empleado.getCelular());
-            updateEmpleado.setRol(empleado.getRol());
+            updateEmpleado.setRol(empleado.getRol()); 
 
             EmpleadoEntity saveEmpleado = empleadoRepository.save(updateEmpleado);
 
