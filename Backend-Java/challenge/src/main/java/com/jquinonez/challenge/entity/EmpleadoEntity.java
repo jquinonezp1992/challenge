@@ -13,17 +13,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.jquinonez.challenge.unique.CedulaUnique;
 import com.jquinonez.challenge.util.EstadoVacunacion;
 
 @Entity
@@ -35,7 +31,6 @@ public class EmpleadoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @CedulaUnique
     @Column(name = "cedula", nullable = false, length = 10, unique = true)
     @Pattern(regexp = "[0-9]{10,10}", message = "La cedula debe ser de 10 números")
     @NotBlank(message = "La cedula es obligatoria")
@@ -56,16 +51,6 @@ public class EmpleadoEntity {
     @NotBlank(message = "El correo electronico es obligatorio")
     private String correo;
 
-    /*
-     * @OneToOne
-     * 
-     * @JoinColumn(name = "usuario_id", nullable = false)
-     */
-    @JsonBackReference
-    @OneToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private UsuarioEntity usuario;
-
     @Column(name = "fechaNacimiento")
     private Date fechaNacimiento;
 
@@ -74,6 +59,15 @@ public class EmpleadoEntity {
 
     @Column(name = "celular")
     private String celular;
+
+    @Column(name = "usuario")
+    private String usuario;
+
+    @Column(name = "clave")
+    private String clave;
+
+    @Column(name = "rol")
+    private String rol;
 
     @Column(name = "estadoVacunacion")
     @Enumerated(value = EnumType.STRING)
@@ -163,12 +157,28 @@ public class EmpleadoEntity {
         this.vacuna = vacuna;
     }
 
-    public UsuarioEntity getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioEntity usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
     
 }

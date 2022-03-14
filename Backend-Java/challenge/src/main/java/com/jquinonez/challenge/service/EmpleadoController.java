@@ -6,9 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.jquinonez.challenge.entity.EmpleadoEntity;
-import com.jquinonez.challenge.entity.UsuarioEntity;
 import com.jquinonez.challenge.repository.EmpleadoRepository;
-import com.jquinonez.challenge.repository.UsuarioRepository;
 import com.jquinonez.challenge.util.EstadoVacunacion;
 import com.jquinonez.challenge.util.Metodo;
 
@@ -17,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,16 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/empleado")
 public class EmpleadoController {
- 
+    
     @Autowired
     private EmpleadoRepository empleadoRepository;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
 
     @GetMapping("/consulta")
     public ResponseEntity<List<EmpleadoEntity>> consultaEmpleados() {
@@ -60,22 +56,24 @@ public class EmpleadoController {
     }
     
     @PostMapping("/crear/empleado")
-    public ResponseEntity<UsuarioEntity> crearEmpleado(@Valid @RequestBody EmpleadoEntity empleado) {
-
+    public ResponseEntity<EmpleadoEntity> crearEmpleado(@Valid @RequestBody EmpleadoEntity empleado) {
         Metodo metodo = new Metodo();
-        
-        String strUsuario = metodo.generateUsername(empleado);
-        String password = metodo.generateRandomPassword(10);
-        UsuarioEntity usuario = new UsuarioEntity();
-        usuario.setUsuario(strUsuario);
-        usuario.setClave(password);
-        usuario.setEmpleado(empleado);
-        empleado.setUsuario(usuario);
-
-        UsuarioEntity nuevoUsuario = usuarioRepository.save(usuario);
-        empleadoRepository.save(empleado);
-
-        return ResponseEntity.ok(nuevoUsuario);
+        String usuario = metodo.generateUsername(empleado);
+        String clave = metodo.generateRandomPassword(10);
+        EmpleadoEntity nuevoEmpleado = new EmpleadoEntity();
+        nuevoEmpleado.setCedula(empleado.getCedula());
+        nuevoEmpleado.setNombre(empleado.getNombre());
+        nuevoEmpleado.setApellido(empleado.getApellido());
+        nuevoEmpleado.setCorreo(empleado.getCorreo());
+        nuevoEmpleado.setUsuario(usuario);
+        nuevoEmpleado.setClave(clave);
+        nuevoEmpleado.setRol(empleado.getRol());
+        nuevoEmpleado.setFechaNacimiento(empleado.getFechaNacimiento());
+        nuevoEmpleado.setDireccion(empleado.getDireccion());
+        nuevoEmpleado.setCelular(empleado.getCelular());
+        nuevoEmpleado.setEstadoVacunacion(empleado.getEstadoVacunacion());
+        empleadoRepository.save(nuevoEmpleado);
+        return ResponseEntity.ok(nuevoEmpleado);
     }
 
     @DeleteMapping(value = "/eliminarEmpleado/{id}")
@@ -101,6 +99,7 @@ public class EmpleadoController {
             updateEmpleado.setFechaNacimiento(empleado.getFechaNacimiento());
             updateEmpleado.setEstadoVacunacion(empleado.getEstadoVacunacion());
             updateEmpleado.setCelular(empleado.getCelular());
+            updateEmpleado.setRol(empleado.getRol());
 
             EmpleadoEntity saveEmpleado = empleadoRepository.save(updateEmpleado);
 
